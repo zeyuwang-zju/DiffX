@@ -36,11 +36,24 @@ class DatasetCatalog:
                 flir_path=ROOT,
                 train_or_test = 'test',
             ),
-        }  # wzy
+        }
 
 
         self.MFNetGrounding = {
             "target": "dataset.mfnet_dataset.MFNetDataset",
+            "train_params":dict(
+                mfnet_path=ROOT,
+                train_or_test = 'train',
+            ),
+            "val_params":dict(
+                mfnet_path=ROOT,
+                train_or_test = 'test',
+            ),
+        }
+
+
+        self.MFNetTripleGrounding = {
+            "target": "dataset.mfnet_triple_dataset.MFNetTripleDataset",
             "train_params":dict(
                 mfnet_path=ROOT,
                 train_or_test = 'train',
@@ -62,7 +75,7 @@ class DatasetCatalog:
                 sod_path=ROOT,
                 train_or_test = 'test',
             ),
-        }  # wzy
+        }
 
         self.SobelGrounding = {
             "target": "dataset.sobel_dataset.SobelDataset",
@@ -72,6 +85,31 @@ class DatasetCatalog:
             ),
             "val_params":dict(
                 sod_path=ROOT,
+                train_or_test = 'test',
+            ),
+        }
+
+        self.SODSobelGrounding = {
+            "target": "dataset.sod_sobel_dataset.SODSobelDataset",
+            "train_params":dict(
+                sod_path=ROOT,
+                train_or_test = 'train',
+            ),
+            "val_params":dict(
+                sod_path=ROOT,
+                train_or_test = 'test',
+            ),
+        }
+
+
+        self.MCXFaceGrounding = {
+            "target": "dataset.mcxface_dataset.MCXFaceDataset",
+            "train_params":dict(
+                mcxface_path=ROOT,
+                train_or_test = 'train',
+            ),
+            "val_params":dict(
+                mcxface_path=ROOT,
                 train_or_test = 'test',
             ),
         }
@@ -95,8 +133,6 @@ class DatasetCatalog:
                 tsv_path=os.path.join(ROOT,'GROUNDING/CC3M/tsv/train-00.tsv'),
             ),
         }
-
-
 
 
 
