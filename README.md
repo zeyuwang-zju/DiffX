@@ -12,25 +12,27 @@
 
 ## 📜 Updates
 
+🚀 **[15/09/2024]** Instruction completed!
+
 🚀 **[15/09/2024]** Code released!
 
 🚀 **[28/07/2024]** The [paper](https://arxiv.org/abs/2407.15488) is released!
 
 ## 👨‍💻 TODO
 - [x] Release code!
-- [x] Complete the instruction!
+- [x] Complete instruction!
 - [ ] Release text captions in datasets
 - [ ] Release pre-trained model weights
 
 ## 🛠️ Usage
-**1. Environment Setup**...
+**1. Environment Setup:**
 
 To set up our environment, please run:
 ```
 pip install -r requirements.txt
 ```
 
-**2. Dataset Preparation**... (This part will come soon)
+**2. Data Preparation**... (This part will come soon)
 
 **3. Long-CLIP Model Preparation:**
 
