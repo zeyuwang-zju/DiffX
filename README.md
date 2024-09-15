@@ -1,6 +1,6 @@
 # DiffX: Guide Your Layout to Cross-Modal Generative Modeling
 
-> **TITLE: DiffX: Guide Your Layout to Cross-Modal Generative Modeling** [[Paper](https://arxiv.org/abs/2407.15488)]
+> **TITLE:** DiffX: Guide Your Layout to Cross-Modal Generative Modeling [[Paper](https://arxiv.org/abs/2407.15488)]
 >
 > **AUTHORS:** Zeyu Wang*, Jingyu Lin*, Yifei Qian, Yi Huang, Shicen Tian, Bosong Chai, Juncan Deng, Qu Yang, Lan Du, Cunjian Chen, Yufei Guo, Kejie Huang (*These authors contributed equally; †Corresponding authors).
 > 
@@ -10,25 +10,33 @@
 
 <img src="img/model.png" style="zoom:65%;" />
 
-## Updates
+## 📜 Updates
 
-**[15/09/2024]** Code released!
+🚀 **[15/09/2024]** Code released!
 
-## TODO
+🚀 **[28/07/2024]** The [paper](https://arxiv.org/abs/2407.15488) is released!
+
+## 👨‍💻 TODO
 - [x] Release code!
-- [ ] Complete the usage instruction
+- [x] Complete the instruction!
 - [ ] Release text captions in datasets
 - [ ] Release pre-trained model weights
 
-## Setup
+## 🛠️ Usage
+**1. Environment Setup**...
+
 To set up our environment, please run:
 ```
 pip install -r requirements.txt
 ```
-## Usage
-**1. Dataset Preparation**...
 
-**2. Training:**
+**2. Dataset Preparation**... (This part will come soon)
+
+**3. Long-CLIP Model Preparation:**
+
+Download the checkpoints of [Long-CLIP]([https://github.com/beichenzbc/Long-CLIP](https://huggingface.co/BeichenZhang/LongCLIP-L)) and place it under `./ldm/modules/encoders/long_clip/checkpoints/`.
+
+**4. Training:**
 
    For the four types of ''RGB+X'' generation tasks on FLIR, MFNet, and COME15K datasets:
    ```
@@ -61,7 +69,7 @@ pip install -r requirements.txt
    CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 scripts/train_diffusion4.py  --yaml_file=configs/mcxface.yaml  --DATA_ROOT=./DATA/mcxface/   --batch_size=2   --save_every_iters 1000   --name mcxface
    ```
 
-**3. Inference:**
+**5. Inference:**
 
    For the four types of ''RGB+X'' generation tasks on FLIR, MFNet, and COME15K datasets:
    ```
