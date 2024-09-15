@@ -12,11 +12,11 @@
 
 ## 📜 Updates
 
-🚀 **[15/09/2024]** Instruction completed!
+🚀 **[15/09/2024]** Instruction is completed!
 
-🚀 **[15/09/2024]** Code released!
+🚀 **[15/09/2024]** Code is released!
 
-🚀 **[28/07/2024]** The [paper](https://arxiv.org/abs/2407.15488) is released!
+🚀 **[28/07/2024]** [Paper](https://arxiv.org/abs/2407.15488) is released!
 
 ## 👨‍💻 TODO
 - [x] Release code!
