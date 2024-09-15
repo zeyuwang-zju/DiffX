@@ -14,38 +14,29 @@
 
 ## Updates
 
-**15/09/2024** Code released!
+**[15/09/2024]** Code released!
 
-## TODO:
+## TODO
 - [x] Release code!
 - [ ] Complete the usage instruction
 - [ ] Release text captions in datasets
 - [ ] Release pre-trained model weights
 
 ## Setup
-
 To set up our environment, please run:
 ```
 pip install -r requirements.txt
 ```
 ## Usage
-
 We will soon complete this section.
-
 ## Pretrained Models
-
 Pretained models coming soon.
-
 ## Acknowledgements
 This code is built on [GLIGEN (PyTorch)](https://github.com/gligen/GLIGEN). We thank the authors for sharing the codes.
-
 ## Contact
 If you have any questions, please contact me by email (wangzeyu2020@zju.edu.cn).
-
 ## Citation
-
 If you make use of our work, please cite our paper:
-
 ```
 @misc{wang2024diffxguidelayoutcrossmodal,
       title={DiffX: Guide Your Layout to Cross-Modal Generative Modeling}, 
@@ -57,7 +48,6 @@ If you make use of our work, please cite our paper:
       url={https://arxiv.org/abs/2407.15488}, 
 }
 ```
-
 ## Results
 **Results1:** Qualitative results of cross-modal “RGB+X” generation on FLIR, MFNet, and COME15K datasets:
 
