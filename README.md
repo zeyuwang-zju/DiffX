@@ -35,7 +35,7 @@ pip install -r requirements.txt
 
 **3. Long-CLIP Model Preparation:**
 
-Download the checkpoint of [Long-CLIP](https://github.com/beichenzbc/Long-CLIP) and place it under `./ldm/modules/encoders/long_clip/checkpoints/`.
+Download the checkpoint of [Long-CLIP](https://huggingface.co/BeichenZhang/LongCLIP-L) and place it under `./ldm/modules/encoders/long_clip/checkpoints/`.
 
 **4. Training:**
 
