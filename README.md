@@ -32,10 +32,15 @@ pip install -r requirements.txt
 
 We will soon complete this section.
 
-## Pretrained Models / Data
+## Pretrained Models
 
 Pretained models coming soon.
 
+## Acknowledgements
+This code is built on [GLIGEN (PyTorch)](https://github.com/gligen/GLIGEN). We thank the authors for sharing the codes.
+
+## Contact
+If you have any questions, please contact me by email (wangzeyu2020@zju.edu.cn).
 
 ## Citation
 
