@@ -85,10 +85,19 @@ pip install -r requirements.txt
 
 ## Pretrained Models
 Pretained models coming soon.
+
 ## Acknowledgements
 This code is built on [GLIGEN (PyTorch)](https://github.com/gligen/GLIGEN). We thank the authors for sharing the codes.
+
+## Licencing
+
+Copyright (C) 2024 Zeyu Wang
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 3 of the License.
+
 ## Contact
 If you have any questions, please contact me by email (wangzeyu2020@zju.edu.cn).
+
 ## Citation
 If you make use of our work, please cite our paper:
 ```
@@ -102,6 +111,7 @@ If you make use of our work, please cite our paper:
       url={https://arxiv.org/abs/2407.15488}, 
 }
 ```
+
 ## Results
 **Results1:** Qualitative results of cross-modal “RGB+X” generation on FLIR, MFNet, and COME15K datasets:
 
