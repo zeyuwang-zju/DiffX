@@ -62,10 +62,10 @@ If you make use of our work, please cite our paper:
 
 **Results2:** Qualitative results on “SOD → RGB+D+Edge” task on COME15K dataset:
 
-<img src="img/result2.png" alt="0.7" style="zoom:50%;" />
+<img src="img/result2.png" alt="0.7" style="zoom:40%;" />
 
 
 
 **Results3:** Qualitative results on “3DDFA → RGB+NIR+SWIR+T” task on MCXFace dataset  :
 
-<img src="img/result3.png" style="zoom:55%;" />
+<img src="img/result3.png" style="zoom:40%;" />
