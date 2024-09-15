@@ -4,7 +4,7 @@
 
 > **DiffX: Guide Your Layout to Cross-Modal Generative Modeling**
 >
-> **Authors:** Zeyu Wang*, Jingyu Lin*, Yifei Qian, Yi Huang, Shicen Tian, Bosong Chai, Juncan Deng, Qu Yang, Lan Du, Cunjian Chen, Yufei Guo, Kejie Huang (*These authors contributed equally. †Corresponding authors. )
+> **Authors:** Zeyu Wang*, Jingyu Lin*, Yifei Qian, Yi Huang, Shicen Tian, Bosong Chai, Juncan Deng, Qu Yang, Lan Du, Cunjian Chen, Yufei Guo, Kejie Huang (*These authors contributed equally; †Corresponding authors).
 > 
 
 >**Abstract**:
