@@ -56,7 +56,7 @@ If you make use of our work, please cite our paper:
 ## Results
 **Results1:** Qualitative results of cross-modal “RGB+X” generation on FLIR, MFNet, and COME15K datasets:
 
-<img src="img/result1.png" alt="0" style="zoom:100%;" />
+<img src="img/result1.png" alt="0" style="zoom:110%;" />
 
 
 
