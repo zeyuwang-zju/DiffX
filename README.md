@@ -85,7 +85,7 @@ pip install -r requirements.txt
 Pretained models coming soon.
 
 ## Acknowledgements
-This code is built on [GLIGEN (PyTorch)](https://github.com/gligen/GLIGEN). We thank the authors for sharing the codes.
+This code is built on [GLIGEN (PyTorch)](https://github.com/gligen/GLIGEN) and [Long-CLIP (PyTorch)](https://github.com/beichenzbc/Long-CLIP). We thank the authors for sharing the codes.
 
 ## Licencing
 
