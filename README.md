@@ -36,7 +36,7 @@ pip install -r requirements.txt
 
 **3. Long-CLIP Model Preparation:**
 
-Download the checkpoints of [Long-CLIP]([https://github.com/beichenzbc/Long-CLIP](https://huggingface.co/BeichenZhang/LongCLIP-L)) and place it under `./ldm/modules/encoders/long_clip/checkpoints/`.
+Download the checkpoint of [Long-CLIP](https://github.com/beichenzbc/Long-CLIP) and place it under `./ldm/modules/encoders/long_clip/checkpoints/`.
 
 **4. Training:**
 
@@ -91,8 +91,8 @@ Download the checkpoints of [Long-CLIP]([https://github.com/beichenzbc/Long-CLIP
    CUDA_VISIBLE_DEVICES=0 python -m torch.distributed.launch --nproc_per_node=1 scripts/inference4.py  --yaml_file=configs/mcxface.yaml  --DATA_ROOT=./DATA/mcxface/  --batch_size=1  --name mcxface
    ```
 
-## Pretrained Models
-Pretained models coming soon.
+## Pre-trained Models
+Pre-trained models coming soon.
 
 ## Acknowledgements
 This code is built on [GLIGEN (PyTorch)](https://github.com/gligen/GLIGEN) and [Long-CLIP (PyTorch)](https://github.com/beichenzbc/Long-CLIP). We thank the authors for sharing the codes.
