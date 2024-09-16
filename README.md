@@ -24,7 +24,14 @@
 - [ ] Release pre-trained model weights
 
 ## 🛠️ Usage
-**1. Environment Setup:**
+
+**1. Repo Clone & Environment Setup:**
+
+Please first clone our repo from github by running the following command.
+```
+git clone https://github.com/zeyuwang-zju/DiffX.git
+cd DiffX
+```
 
 To set up our environment, please run:
 ```
