@@ -2,12 +2,12 @@
 
 > **TITLE:** DiffX: Guide Your Layout to Cross-Modal Generative Modeling [[Paper](https://arxiv.org/abs/2407.15488)]
 >
-> **AUTHORS:** Zeyu Wang*, Jingyu Lin*, Yifei Qian, Yi Huang, Shicen Tian, Bosong Chai, Juncan Deng, Qu Yang, Lan Du, Cunjian Chen, Yufei Guo, Kejie Huang (*These authors contributed equally; †Corresponding authors).
+> **AUTHORS:** Zeyu Wang*, Jingyu Lin*, Yifei Qian, Yi Huang, Shicen Tian, Bosong Chai, Juncan Deng, Qu Yang, Lan Du, Cunjian Chen, Yufei Guo†, Kejie Huang† (*These authors contributed equally; †Corresponding authors).
 > 
 >**ABSTRACT**:
 > Diffusion models have made significant strides in languagedriven and layout-driven image generation. However, most diffusion models are limited to visible RGB image generation. In fact, human perception of the world is enriched by diverse viewpoints, such as chromatic contrast, thermal illumination, and depth information. In this paper, we introduce a novel diffusion model for general layoutguided cross-modal generation, called DiffX. Notably, our DiffX presents a simple yet effective cross-modal generative modeling pipeline, which conducts diffusion and denoising processes in the modality shared latent space. Moreover, we introduce the Joint-Modality Embedder (JME) to enhance the interaction between layout and text conditions by incorporating a gated attention mechanism. To facilitate the user-instructed training, we construct the cross-modal image datasets with detailed text captions by the LargeMultimodal Model (LMM) and our human-in-the-loop refinement. Through extensive experiments, our DiffX demonstrates robustness in cross-modal “RGB+X” image generation on FLIR, MFNet, and COME15K datasets, guided by various layout conditions. It also shows the potential for the adaptive generation of “RGB+X+Y(+Z)” images or more diverse modalities on COME15K and MCXFace datasets. Our code and constructed cross-modal image datasets are available at https://github.com/zeyuwang-zju/DiffX.  
 
-<img src="img/model.png" style="zoom:65%;" />
+![model](https://github.com/user-attachments/assets/ea6c81ad-e8b1-423c-ac63-e9354329c385)
 
 ## 📜 Updates
 
@@ -122,16 +122,18 @@ If you make use of our work, please cite our paper:
 ## Results
 **Results1:** Qualitative results of cross-modal “RGB+X” generation on FLIR, MFNet, and COME15K datasets:
 
-<img src="img/result1.png" alt="0" style="zoom:110%;" />
+![result1](https://github.com/user-attachments/assets/5e9b1754-2fcd-4afe-a721-dcd29abaa7f1)
 
 
 
 **Results2:** Qualitative results on “SOD → RGB+D+Edge” task on COME15K dataset:
 
-<img src="img/result2.png" alt="0.7" style="zoom:40%;" />
+![result2](https://github.com/user-attachments/assets/dd963488-9dde-47be-a926-3787706d5703)
 
 
 
 **Results3:** Qualitative results on “3DDFA → RGB+NIR+SWIR+T” task on MCXFace dataset  :
 
-<img src="img/result3.png" style="zoom:40%;" />
+![result3](https://github.com/user-attachments/assets/1c74c3f3-3c31-4a36-b81f-fc3605fc24a5)
+
+More results can be found in our paper and appendix!
