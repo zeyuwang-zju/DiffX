@@ -1,4 +1,4 @@
-# DiffX: Guide Your Layout to Cross-Modal Generative Modeling
+# DiffX
 
 > **TITLE:** DiffX: Guide Your Layout to Cross-Modal Generative Modeling [[Paper](https://arxiv.org/abs/2407.15488)]
 >
