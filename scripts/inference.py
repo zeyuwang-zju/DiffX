@@ -332,16 +332,16 @@ if __name__ == "__main__":
     
     config.train_dataset_names.FlirGrounding.prob_use_caption = 1
     config.train_dataset_names.FlirGrounding.random_crop = False
-    config.train_dataset_names.FlirGrounding.random_flip = False    
+    config.train_dataset_names.FlirGrounding.random_flip = False   
+    # config.train_dataset_names.MFNetGrounding.prob_use_caption = 1
+    # config.train_dataset_names.MFNetGrounding.random_crop = False
+    # config.train_dataset_names.MFNetGrounding.random_flip = False 
     # config.train_dataset_names.SODGrounding.prob_use_caption = 1
     # config.train_dataset_names.SODGrounding.random_crop = False
     # config.train_dataset_names.SODGrounding.random_flip = False
-    # config.train_dataset_names.SobelGrounding.prob_use_caption = 0
+    # config.train_dataset_names.SobelGrounding.prob_use_caption = 1
     # config.train_dataset_names.SobelGrounding.random_crop = False
     # config.train_dataset_names.SobelGrounding.random_flip = False
-    # config.train_dataset_names.MFNetGrounding.prob_use_caption = 1
-    # config.train_dataset_names.MFNetGrounding.random_crop = False
-    # config.train_dataset_names.MFNetGrounding.random_flip = False
 
     trainer = Inference(config)
     synchronize()
