@@ -227,7 +227,7 @@ class Inference:
 
             if "sem" in batch:
                 os.makedirs(os.path.join(self.name, 'sem'), exist_ok=True)
-                if batch["sem"].shape[2] == 9:
+                if batch["sem"].shape[1] == 9:
                     color_map = {
                         0: [0, 0, 0],
                         1: [255, 0, 0],
