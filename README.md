@@ -1,6 +1,6 @@
 # DiffX
 
-> **TITLE:** DiffX: Guide Your Layout to Cross-Modal Generative Modeling [[Paper](https://arxiv.org/abs/2407.15488)]
+> **TITLE:** DiffX: Guide Your Layout to Cross-Modal Generative Modeling [[Paper](https://arxiv.org/abs/2407.15488)] [[Page](https://jonyond-lin.github.io/DiffX_page/)]
 >
 > **AUTHORS:** Zeyu Wang*, Jingyu Lin*, Yifei Qian, Yi Huang, Shicen Tian, Bosong Chai, Juncan Deng, Qu Yang, Lan Du, Cunjian Chen, Yufei Guo†, Kejie Huang† (*These authors contributed equally; †Corresponding authors).
 > 
@@ -10,6 +10,7 @@
 ![model](https://github.com/user-attachments/assets/ea6c81ad-e8b1-423c-ac63-e9354329c385)
 
 ## 📜 Updates
+🚀 **[03/10/2024]** [Page](https://jonyond-lin.github.io/DiffX_page/) is released!
 
 🚀 **[15/09/2024]** Instruction is completed!
 
@@ -18,8 +19,9 @@
 🚀 **[28/07/2024]** [Paper](https://arxiv.org/abs/2407.15488) is released!
 
 ## 👨‍💻 TODO
-- [x] Release code!
-- [x] Complete instruction!
+- [x] Release the code!
+- [x] Complete the instruction!
+- [x] Release the page!
 - [ ] Release text captions in datasets
 - [ ] Release pre-trained model weights
 
