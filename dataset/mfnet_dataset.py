@@ -37,7 +37,7 @@ class MFNetDataset(BaseDataset):
         self.random_flip = random_flip
         self.pil_to_tensor = transforms.PILToTensor()
 
-        file = os.path.join(mfnet_path, 'Main', 'trainval.txt') if train_or_test == 'train' else os.path.join(mfnet_path, 'Main', 'test.txt')
+        file = os.path.join(mfnet_path, 'Main', 'train.txt') if train_or_test == 'train' else os.path.join(mfnet_path, 'Main', 'test.txt')
         with open(file, 'r') as file:
             self.file_list = [line.strip() for line in file.readlines()]
 
