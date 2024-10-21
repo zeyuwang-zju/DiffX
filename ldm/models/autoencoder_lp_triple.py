@@ -120,13 +120,13 @@ class TripleAutoencoderLP(nn.Module):
         self.conv_in_D = torch.nn.Conv2d(3, ddconfig["in_channels"], 3, 1, 1)
         self.norm_D = Normalize(ddconfig["in_channels"])
 
-        self.conv_in_Sobel = torch.nn.Conv2d(3, ddconfig["in_channels"], 3, 1, 1)
-        self.norm_Sobel = Normalize(ddconfig["in_channels"])
+        self.conv_in_TIR = torch.nn.Conv2d(3, ddconfig["in_channels"], 3, 1, 1)
+        self.norm_TIR = Normalize(ddconfig["in_channels"])
 
         self.encoder = Encoder(**ddconfig)
         self.decoder_RGB = Decoder(**ddconfig)
         self.decoder_D = Decoder(**ddconfig)
-        self.decoder_Sobel = Decoder(**ddconfig)
+        self.decoder_TIR = Decoder(**ddconfig)
         assert ddconfig["double_z"]
         self.quant_conv = torch.nn.Conv2d(2*ddconfig["z_channels"], 2*embed_dim, 1)
         self.post_quant_conv = torch.nn.Conv2d(embed_dim, ddconfig["z_channels"], 1)
@@ -139,23 +139,23 @@ class TripleAutoencoderLP(nn.Module):
             setattr(self, f'pyr_conv{i}', torch.nn.Conv2d(9, ddconfig["ch"] * ddconfig["ch_mult"][i], 3, 1, 1))
             setattr(self, f'pyr_norm{i}', Normalize(ddconfig["ch"] * ddconfig["ch_mult"][i]))
 
-    def encode(self, image_RGB, image_D, image_Sobel):
+    def encode(self, image_RGB, image_D, image_TIR):
         pyramid_RGB = self.pyramid_decom(image_RGB)
         pyramid_D = self.pyramid_decom(image_D)
-        pyramid_Sobel = self.pyramid_decom(image_Sobel)
+        pyramid_TIR = self.pyramid_decom(image_TIR)
         pyramid_feat = []
 
         for i in range(len(pyramid_RGB)):
-            temp_feat = getattr(self, f'pyr_conv{i}')(torch.cat((pyramid_RGB[i], pyramid_D[i], pyramid_Sobel[i]), dim=1))
+            temp_feat = getattr(self, f'pyr_conv{i}')(torch.cat((pyramid_RGB[i], pyramid_D[i], pyramid_TIR[i]), dim=1))
             temp_feat = getattr(self, f'pyr_norm{i}')(temp_feat)
             temp_feat = nonlinearity(temp_feat)
             pyramid_feat.append(temp_feat)
 
         h_RGB = nonlinearity(self.norm_RGB(self.conv_in_RGB(image_RGB)))
         h_D = nonlinearity(self.norm_D(self.conv_in_D(image_D)))
-        h_Sobel = nonlinearity(self.norm_Sobel(self.conv_in_Sobel(image_Sobel)))
+        h_TIR = nonlinearity(self.norm_TIR(self.conv_in_TIR(image_TIR)))
 
-        h = h_RGB + h_D + h_Sobel
+        h = h_RGB + h_D + h_TIR
 
         h = self.encoder(h, pyramid_feat)
         moments = self.quant_conv(h)
@@ -167,9 +167,9 @@ class TripleAutoencoderLP(nn.Module):
         z = self.post_quant_conv(z)
         dec_RGB = self.decoder_RGB(z)
         dec_D = self.decoder_D(z)
-        dec_Sobel = self.decoder_Sobel(z)
+        dec_TIR = self.decoder_TIR(z)
 
-        return dec_RGB, dec_D, dec_Sobel
+        return dec_RGB, dec_D, dec_TIR
 
     def pyramid_decom(self, image):
         current = image
