@@ -19,23 +19,21 @@ model:
     num_heads: 8
     transformer_depth: 1
     context_dim: 768
-    fuser_type: gatedSA 
+    fuser_type: gatedSA
     use_checkpoint: True
 
 
     grounding_downsampler:
       target: ldm.modules.diffusionmodules.sem_grounding_downsampler.GroundingDownsampler
       params:
-        # in_dim: 152
-        in_dim: 2
+        in_dim: 9
         resize_input: 256
         out_dim: 8 
 
     grounding_tokenizer:
       target: ldm.modules.diffusionmodules.sem_grounding_net.PositionNet
       params:
-        # in_dim: 152
-        in_dim: 2
+        in_dim: 9
         resize_input: 256
         out_dim: 768 
 
@@ -63,13 +61,13 @@ autoencoder:
 
 
 text_encoder:
-  target: ldm.modules.encoders.modules.FrozenLongCLIPEmbedder
+  target: ldm.modules.encoders.modules.FrozenLongCLIPEmbedder  # wzy
 
 
 
 
 train_dataset_names: 
-  MFNetTripleGrounding:
+  MFNetGrounding:
     prob_use_caption: 0.5
     image_size: 512
     random_crop: True
