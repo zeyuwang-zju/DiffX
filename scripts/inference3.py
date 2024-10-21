@@ -255,7 +255,27 @@ class Inference:
 
                 torch_image = torch.from_numpy(color_image.transpose((2, 0, 1))).float() / 255
                 torchvision.utils.save_image( torch_image, os.path.join(self.name, 'sem', f'{item}.jpg'), nrow=1, normalize=True, scale_each=True, range=(-1,1))
-
+                
+            if "boxes" in batch:
+                os.makedirs(os.path.join(self.name, 'box_rgb'), exist_ok=True)
+                os.makedirs(os.path.join(self.name, 'box_d'), exist_ok=True)
+                os.makedirs(os.path.join(self.name, 'box_tir'), exist_ok=True)
+                os.makedirs(os.path.join(self.name, 'box_zero'), exist_ok=True)
+                
+                temp_data = {"image": dec_RGB[0], "boxes":batch["boxes"][0], "labels":batch["labels"]}
+                im = self.dataset_val.datasets[0].vis_getitem_data(out=temp_data, return_tensor=True, print_caption=False)
+                torchvision.utils.save_image( im, os.path.join(self.name, 'box_rgb', f'{item}.jpg'), nrow=1, normalize=True, scale_each=True, range=(-1,1))
+                temp_data = {"image": dec_D[0], "boxes":batch["boxes"][0], "labels":batch["labels"]}
+                im = self.dataset_val.datasets[0].vis_getitem_data(out=temp_data, return_tensor=True, print_caption=False)
+                torchvision.utils.save_image( im, os.path.join(self.name, 'box_d', f'{item}.jpg'), nrow=1, normalize=True, scale_each=True, range=(-1,1))
+                temp_data = {"image": dec_TIR[0], "boxes":batch["boxes"][0], "labels":batch["labels"]}
+                im = self.dataset_val.datasets[0].vis_getitem_data(out=temp_data, return_tensor=True, print_caption=False)
+                torchvision.utils.save_image( im, os.path.join(self.name, 'box_tir', f'{item}.jpg'), nrow=1, normalize=True, scale_each=True, range=(-1,1))
+                
+                temp_data = {"image": torch.zeros_like(dec_RGB)[0], "boxes":batch["boxes"][0], "labels":batch["labels"]}
+                im = self.dataset_val.datasets[0].vis_getitem_data(out=temp_data, return_tensor=True, print_caption=False, return_canvas=True)
+                torchvision.utils.save_image( im, os.path.join(self.name, 'box_zero', f'{item}.jpg'), nrow=1, normalize=False, scale_each=True, range=(0,1))
+        
         synchronize()
         print("Inference finished. Start exiting")
         exit()
@@ -322,12 +342,12 @@ if __name__ == "__main__":
     # config.train_dataset_names.SODSobelGrounding.random_crop = False
     # config.train_dataset_names.SODSobelGrounding.random_flip = False
 
-    # config.train_dataset_names.FlirGrounding.prob_use_caption = 1
-    # config.train_dataset_names.FlirGrounding.random_crop = False
-    # config.train_dataset_names.FlirGrounding.random_flip = False   
-    config.train_dataset_names.MFNetGrounding.prob_use_caption = 1
-    config.train_dataset_names.MFNetGrounding.random_crop = False
-    config.train_dataset_names.MFNetGrounding.random_flip = False 
+    config.train_dataset_names.FlirGrounding.prob_use_caption = 1
+    config.train_dataset_names.FlirGrounding.random_crop = False
+    config.train_dataset_names.FlirGrounding.random_flip = False   
+    # config.train_dataset_names.MFNetGrounding.prob_use_caption = 1
+    # config.train_dataset_names.MFNetGrounding.random_crop = False
+    # config.train_dataset_names.MFNetGrounding.random_flip = False 
 
     trainer = Inference(config)
     synchronize()
