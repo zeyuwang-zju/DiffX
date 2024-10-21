@@ -10,6 +10,8 @@
 ![model](https://github.com/user-attachments/assets/ea6c81ad-e8b1-423c-ac63-e9354329c385)
 
 ## 📜 Updates
+🚀 **[20/10/2024]** Experiments on RGB+T+D generation are added!
+
 🚀 **[03/10/2024]** [Page](https://jonyond-lin.github.io/DiffX_page/) is released!
 
 🚀 **[15/09/2024]** Instruction is completed!
@@ -63,12 +65,14 @@ Download the checkpoint of [Long-CLIP](https://huggingface.co/BeichenZhang/LongC
    CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 scripts/train_diffusion.py  --yaml_file=configs/come_sobel.yaml  --DATA_ROOT=./DATA/come/   --batch_size=8   --save_every_iters 1000   --name come_sobel
    ```
 
-   For the ''SOD → RGB+D+Edge'' task on COME15K dataset:
+   For the ''RGB+T+D'' generation task on FLIR and MFNet datasets:
    ```
    # Firstly, train the MP-VAE:
-   CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 scripts/train_autoencoder3.py  --yaml_file=configs/come_sobel_sod.yaml  --DATA_ROOT=./DATA/come/   --batch_size=1   --save_every_iters 1000   --name come3
+   CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 scripts/train_autoencoder3.py  --yaml_file=configs/flir_text_triple.yaml  --DATA_ROOT=./DATA/flir/   --batch_size=1   --save_every_iters 1000   --name flir3
+   CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 scripts/train_autoencoder3.py  --yaml_file=configs/mfnet_triple.yaml  --DATA_ROOT=./DATA/mfnet/   --batch_size=1   --save_every_iters 1000   --name mfnet3
    # Secondly, train the DiffX-UNet:
-   CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 scripts/train_diffusion3.py  --yaml_file=configs/come_sobel_sod.yaml  --DATA_ROOT=./DATA/come/   --batch_size=8   --save_every_iters 1000   --name come3
+   CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 scripts/train_diffusion3.py  --yaml_file=configs/flir_text_triple.yaml  --DATA_ROOT=./DATA/flir/   --batch_size=8   --save_every_iters 1000   --name flir3
+   CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 scripts/train_diffusion3.py  --yaml_file=configs/mfnet_triple.yaml  --DATA_ROOT=./DATA/mfnet/   --batch_size=8   --save_every_iters 1000   --name mfnet3
    ```
 
    For the ''3DDFA → RGB+NIR+SWIR+T'' task on MCXFace dataset:
@@ -84,14 +88,15 @@ Download the checkpoint of [Long-CLIP](https://huggingface.co/BeichenZhang/LongC
    For the four types of ''RGB+X'' generation tasks on FLIR, MFNet, and COME15K datasets:
    ```
    CUDA_VISIBLE_DEVICES=0 python -m torch.distributed.launch --nproc_per_node=1 scripts/inference.py  --yaml_file=configs/flir_text.yaml  --DATA_ROOT=./DATA/flir/  --name flir
-   CUDA_VISIBLE_DEVICES=0 python -m torch.distributed.launch --nproc_per_node=1 scripts/inference.py  --yaml_file=configs/mfnet.yaml  --DATA_ROOT=./DATA/flir/  --name mfnet
-   CUDA_VISIBLE_DEVICES=0 python -m torch.distributed.launch --nproc_per_node=1 scripts/inference.py  --yaml_file=configs/come.yaml  --DATA_ROOT=./DATA/flir/  --name come
-   CUDA_VISIBLE_DEVICES=0 python -m torch.distributed.launch --nproc_per_node=1 scripts/inference.py  --yaml_file=configs/come_sobel.yaml  --DATA_ROOT=./DATA/flir/  --name come_sobel
+   CUDA_VISIBLE_DEVICES=0 python -m torch.distributed.launch --nproc_per_node=1 scripts/inference.py  --yaml_file=configs/mfnet.yaml  --DATA_ROOT=./DATA/mfnet/  --name mfnet
+   CUDA_VISIBLE_DEVICES=0 python -m torch.distributed.launch --nproc_per_node=1 scripts/inference.py  --yaml_file=configs/come.yaml  --DATA_ROOT=./DATA/come/  --name come
+   CUDA_VISIBLE_DEVICES=0 python -m torch.distributed.launch --nproc_per_node=1 scripts/inference.py  --yaml_file=configs/come_sobel.yaml  --DATA_ROOT=./DATA/come/  --name come_sobel
    ```
 
-   For the ''SOD → RGB+D+Edge'' task on COME15K dataset:
+   For the ''RGB+T+D'' generation task on FLIR and MFNet datasets:
    ```
-   CUDA_VISIBLE_DEVICES=0 python -m torch.distributed.launch --nproc_per_node=1 scripts/inference3.py  --yaml_file=configs/come_sobel_sod.yaml  --DATA_ROOT=./DATA/come/  --name come3
+   CUDA_VISIBLE_DEVICES=0 python -m torch.distributed.launch --nproc_per_node=1 scripts/inference3.py  --yaml_file=configs/flir_text_triple.yaml  --DATA_ROOT=./DATA/flir/  --name flir3
+   CUDA_VISIBLE_DEVICES=0 python -m torch.distributed.launch --nproc_per_node=1 scripts/inference3.py  --yaml_file=configs/mfnet_triple.yaml  --DATA_ROOT=./DATA/mfnet/  --name mfnet3
    ```
 
    For the ''3DDFA → RGB+NIR+SWIR+T'' task on MCXFace dataset:
