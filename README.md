@@ -10,7 +10,7 @@
 ![model](https://github.com/user-attachments/assets/ea6c81ad-e8b1-423c-ac63-e9354329c385)
 
 ## 📜 Updates
-🚀 **[20/10/2024]** Experiments on RGB+T+D generation are added!
+🚀 **[20/10/2024]** New experiments on RGB+T+D generation are added!
 
 🚀 **[03/10/2024]** [Page](https://jonyond-lin.github.io/DiffX_page/) is released!
 
