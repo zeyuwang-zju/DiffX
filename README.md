@@ -136,13 +136,13 @@ If you make use of our work, please cite our paper:
 ## Results
 **Results1:** Qualitative results of cross-modal “RGB+X” generation on FLIR, MFNet, and COME15K datasets:
 
-![result1](https://github.com/user-attachments/assets/5e9b1754-2fcd-4afe-a721-dcd29abaa7f1)
+![image](https://github.com/user-attachments/assets/44588c75-0b24-4fbd-8b70-6412adb5823a)
 
 
 
-**Results2:** Qualitative results on “SOD → RGB+D+Edge” task on COME15K dataset:
+**Results2:** Qualitative results on cross-modal “RGB+X+Y” generation on FLIR, MFNet, and COME15K datasets:
 
-![result2](https://github.com/user-attachments/assets/dd963488-9dde-47be-a926-3787706d5703)
+![image](https://github.com/user-attachments/assets/c934757d-c78a-4e7a-a9a7-e70af46222e7)
 
 
 
