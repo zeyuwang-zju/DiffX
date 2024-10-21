@@ -114,11 +114,14 @@ class FLIRDataset(BaseDataset):
         out['item'] = item
         image_RGB_path = os.path.join(self.flir_path, 'JPEGImages_RGB', f'{item}.jpg')
         image_TIR_path = os.path.join(self.flir_path, 'JPEGImages_TIR', f'{item}.jpg')
+        image_D_path = os.path.join(self.flir_path, 'JPEGImages_D', f'{item}.jpg')
         image_RGB = Image.open(image_RGB_path).convert('RGB')
         image_TIR = Image.open(image_TIR_path).convert('RGB')
-        image_tensor_RGB, image_tensor_TIR, trans_info, flip = self.transform_image_pair(image_RGB, image_TIR)
+        image_D = Image.open(image_D_path).convert('RGB')
+        image_tensor_RGB, image_tensor_TIR, image_tensor_D, trans_info, flip = self.transform_image_triple(image_RGB, image_TIR, image_D)
         out["image_RGB"] = image_tensor_RGB.detach()
         out["image_TIR"] = image_tensor_TIR.detach()
+        out["image_D"] = image_tensor_D.detach()
 
         # -------------------- grounding token ------------------- # 
         label_path = os.path.join(self.flir_path, 'labels', f'{item}.txt')

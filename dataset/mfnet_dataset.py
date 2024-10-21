@@ -37,7 +37,7 @@ class MFNetDataset(BaseDataset):
         self.random_flip = random_flip
         self.pil_to_tensor = transforms.PILToTensor()
 
-        file = os.path.join(mfnet_path, 'Main', 'train.txt') if train_or_test == 'train' else os.path.join(mfnet_path, 'Main', 'test.txt')
+        file = os.path.join(mfnet_path, 'Main', 'trainval.txt') if train_or_test == 'train' else os.path.join(mfnet_path, 'Main', 'test.txt')
         with open(file, 'r') as file:
             self.file_list = [line.strip() for line in file.readlines()]
 
@@ -55,10 +55,12 @@ class MFNetDataset(BaseDataset):
         out['item'] = item
         image_RGB_path = os.path.join(self.mfnet_path, 'JPEGImages_RGB', f'{item}.jpg')
         image_TIR_path = os.path.join(self.mfnet_path, 'JPEGImages_TIR', f'{item}.jpg')
+        image_D_path = os.path.join(self.mfnet_path, 'JPEGImages_D', f'{item}.jpg')
         sem_path = os.path.join(self.mfnet_path, 'labels', f'{item}.png')
 
         image_RGB = Image.open(image_RGB_path).convert('RGB')
         image_TIR = Image.open(image_TIR_path).convert('RGB')
+        image_D = Image.open(image_D_path).convert('RGB')
         sem = Image.open(sem_path).convert("L") # semantic class index 0,1,2,3,4 in uint8 representation 
 
         # - - - - - center_crop, resize and random_flip - - - - - - #
@@ -71,6 +73,7 @@ class MFNetDataset(BaseDataset):
             new_height = int(height * scale_factor)
             image_RGB = image_RGB.resize((new_width, new_height), Image.NEAREST)
             image_TIR = image_TIR.resize((new_width, new_height), Image.NEAREST)
+            image_D = image_D.resize((new_width, new_height), Image.NEAREST)
             sem = sem.resize((new_width, new_height), Image.NEAREST)
 
             crop_x = random.randint(0, new_width - self.image_size)
@@ -78,6 +81,7 @@ class MFNetDataset(BaseDataset):
             
             image_RGB = image_RGB.crop((crop_x, crop_y, crop_x+self.image_size, crop_y+self.image_size))
             image_TIR = image_TIR.crop((crop_x, crop_y, crop_x+self.image_size, crop_y+self.image_size))
+            image_D = image_D.crop((crop_x, crop_y, crop_x+self.image_size, crop_y+self.image_size))
             sem = sem.crop((crop_x, crop_y, crop_x+self.image_size, crop_y+self.image_size))
 
         else:
@@ -87,6 +91,7 @@ class MFNetDataset(BaseDataset):
             new_height = int(height * scale_factor)
             image_RGB = image_RGB.resize((new_width, new_height), Image.NEAREST)
             image_TIR = image_TIR.resize((new_width, new_height), Image.NEAREST)
+            image_D = image_D.resize((new_width, new_height), Image.NEAREST)
             sem = sem.resize((new_width, new_height), Image.NEAREST)
 
             crop_x = (new_width - self.image_size) // 2
@@ -94,6 +99,7 @@ class MFNetDataset(BaseDataset):
 
             image_RGB = image_RGB.crop((crop_x, crop_y, crop_x+self.image_size, crop_y+self.image_size))
             image_TIR = image_TIR.crop((crop_x, crop_y, crop_x+self.image_size, crop_y+self.image_size))
+            image_D = image_D.crop((crop_x, crop_y, crop_x+self.image_size, crop_y+self.image_size))
             sem = sem.crop((crop_x, crop_y, crop_x+self.image_size, crop_y+self.image_size))
 
         flip = False
@@ -101,6 +107,7 @@ class MFNetDataset(BaseDataset):
             flip = True
             image_RGB = ImageOps.mirror(image_RGB)
             image_TIR = ImageOps.mirror(image_TIR)
+            image_D = ImageOps.mirror(image_D)
             sem = ImageOps.mirror(sem)    
 
         sem = self.pil_to_tensor(sem)[0,:,:]
@@ -110,6 +117,7 @@ class MFNetDataset(BaseDataset):
 
         out["image_RGB"] = ( self.pil_to_tensor(image_RGB).float()/255 - 0.5 ) / 0.5
         out["image_TIR"] = ( self.pil_to_tensor(image_TIR).float()/255 - 0.5 ) / 0.5
+        out["image_D"] = ( self.pil_to_tensor(image_D).float()/255 - 0.5 ) / 0.5
         out['sem'] = sem
         out['mask'] = torch.tensor(1.0) 
 
