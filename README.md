@@ -9,6 +9,8 @@
 
 ![model](https://github.com/user-attachments/assets/ea6c81ad-e8b1-423c-ac63-e9354329c385)
 
+![image](https://github.com/user-attachments/assets/974a0a7d-ca79-4de9-b7e4-c1e46a4079cf)
+
 ## 📜 Updates
 🚀 **[20/10/2024]** New experiments on RGB+T+D generation are added!
 
