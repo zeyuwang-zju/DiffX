@@ -335,7 +335,7 @@ class Trainer:
     @torch.no_grad()
     def get_input(self, batch):
 
-        z = self.autoencoder.encode( batch["image_RGB"], batch["image_D"], batch["image_sobel"] )
+        z = self.autoencoder.encode( batch["image_RGB"], batch["image_D"], batch["image_TIR"] )
         context = self.text_encoder.encode( batch["caption"]  )
 
         _t = torch.rand(z.shape[0]).to(z.device)
@@ -444,7 +444,7 @@ class Trainer:
                 for i in range(batch_here):
                     real_images_with_box_drawing.append(batch["image_RGB"][i]*0.5 + 0.5)
                     real_images_with_box_drawing.append(batch["image_D"][i]*0.5 + 0.5)
-                    real_images_with_box_drawing.append(batch["image_sobel"][i]*0.5 + 0.5)
+                    real_images_with_box_drawing.append(batch["image_TIR"][i]*0.5 + 0.5)
 
                 real_images_with_box_drawing = torch.stack(real_images_with_box_drawing)
             
@@ -469,16 +469,16 @@ class Trainer:
             samples = plms_sampler.sample(S=50, shape=shape, input=input, uc=uc, guidance_scale=5)
             
             autoencoder_wo_wrapper = self.autoencoder # Note itself is without wrapper since we do not train that. 
-            dec_RGB, dec_D, dec_Sobel = autoencoder_wo_wrapper.decode(samples)
+            dec_RGB, dec_D, dec_TIR = autoencoder_wo_wrapper.decode(samples)
             dec_RGB = torch.clamp(dec_RGB, min=-1, max=1).cpu()
             dec_D = torch.clamp(dec_D, min=-1, max=1).cpu()
-            dec_Sobel = torch.clamp(dec_Sobel, min=-1, max=1).cpu()
+            dec_TIR = torch.clamp(dec_TIR, min=-1, max=1).cpu()
 
             samples = []
             for i in range(batch_here):
                 samples.append(dec_RGB[i])
                 samples.append(dec_D[i])
-                samples.append(dec_Sobel[i])
+                samples.append(dec_TIR[i])
             samples = torch.stack(samples)
             masked_real_image = None
 
@@ -619,3 +619,5 @@ if __name__ == "__main__":
     trainer.start_training()
 
     # CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 train_diffusion3.py  --yaml_file=configs/come_sobel_sod.yaml  --DATA_ROOT=./DATA/come/   --batch_size=8   --save_every_iters 1000   --name come3
+
+    # CUDA_VISIBLE_DEVICES=1,3 python -m torch.distributed.launch --nproc_per_node=2 scripts/train_diffusion3.py  --yaml_file=configs/mfnet_triple.yaml  --DATA_ROOT=/data16_2/wangzeyu/dataset/mfnet/  --OUTPUT_ROOT /data16_2/wangzeyu/diffx_output/   --batch_size=8   --save_every_iters 1000   --name mfnet3

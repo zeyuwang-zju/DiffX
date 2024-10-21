@@ -169,7 +169,7 @@ class Trainer_Autoencoder:
                 elif k.replace('decoder', 'decoder_RGB') in model_dict.keys() and np.shape(model_dict[k.replace('decoder', 'decoder_RGB')]) == np.shape(v):
                     temp_dict[k.replace('decoder', 'decoder_RGB')] = v
                     temp_dict[k.replace('decoder', 'decoder_D')] = v
-                    temp_dict[k.replace('decoder', 'decoder_Sobel')] = v
+                    temp_dict[k.replace('decoder', 'decoder_TIR')] = v
                     load_key.append(k)
                 else:
                     no_load_key.append(k)
@@ -181,11 +181,11 @@ class Trainer_Autoencoder:
                 print("\nFail To Load Key:", str(no_load_key)[:500], "……\nFail To Load Key num:", len(no_load_key))
 
     def run_one_step(self, batch):
-        z = self.autoencoder.encode( batch["image_RGB"], batch["image_D"], batch["image_sobel"] )
-        dec_RGB, dec_D, dec_Sobel = self.autoencoder.decode(z)
+        z = self.autoencoder.encode( batch["image_RGB"], batch["image_D"], batch["image_TIR"] )
+        dec_RGB, dec_D, dec_TIR = self.autoencoder.decode(z)
         
-        loss_mse = (torch.nn.functional.mse_loss(dec_RGB, batch["image_RGB"]) + torch.nn.functional.mse_loss(dec_D, batch["image_D"]) + torch.nn.functional.mse_loss(dec_Sobel, batch["image_sobel"]))
-        loss_lpips = (self.lpips_loss(dec_RGB, batch["image_RGB"]) + self.lpips_loss(dec_D, batch["image_D"]) + self.lpips_loss(dec_Sobel, batch["image_sobel"])).mean()
+        loss_mse = (torch.nn.functional.mse_loss(dec_RGB, batch["image_RGB"]) + torch.nn.functional.mse_loss(dec_D, batch["image_D"]) + torch.nn.functional.mse_loss(dec_TIR, batch["image_TIR"]))
+        loss_lpips = (self.lpips_loss(dec_RGB, batch["image_RGB"]) + self.lpips_loss(dec_D, batch["image_D"]) + self.lpips_loss(dec_TIR, batch["image_TIR"])).mean()
         loss = loss_mse + loss_lpips
 
         self.loss_dict = {"loss": loss.item(), "loss_mse": loss_mse.item(), "loss_lpips": loss_lpips}
@@ -235,11 +235,11 @@ class Trainer_Autoencoder:
             batch = sub_batch( next(self.loader_train), batch_here)
             batch_to_device(batch, self.device)
 
-            z = self.autoencoder.encode( batch["image_RGB"], batch["image_D"], batch["image_sobel"] )
-            dec_RGB, dec_D, dec_Sobel = self.autoencoder.decode(z)
+            z = self.autoencoder.encode( batch["image_RGB"], batch["image_D"], batch["image_TIR"] )
+            dec_RGB, dec_D, dec_TIR = self.autoencoder.decode(z)
 
             save_path = os.path.join(self.name, str(iter_name).zfill(8)+'.png')
-            torchvision.utils.save_image( torch.cat([batch["image_RGB"], batch["image_D"], batch["image_sobel"], dec_RGB, dec_D, dec_Sobel], dim=0), save_path, nrow=self.config.batch_size * 3, normalize=True, scale_each=True, range=(-1,1) )
+            torchvision.utils.save_image( torch.cat([batch["image_RGB"], batch["image_D"], batch["image_TIR"], dec_RGB, dec_D, dec_TIR], dim=0), save_path, nrow=self.config.batch_size * 3, normalize=True, scale_each=True, range=(-1,1) )
 
         ckpt = dict(
             autoencoder = self.autoencoder.state_dict(),
@@ -318,3 +318,5 @@ if __name__ == "__main__":
 
 
     # CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 train_autoencoder3.py  --yaml_file=configs/come_sobel_sod.yaml  --DATA_ROOT=./DATA/come/   --batch_size=1   --save_every_iters 1000   --name come3
+
+    # CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 scripts/train_autoencoder3.py  --yaml_file=configs/mfnet_triple.yaml  --DATA_ROOT=/disk3/zeyu/MFNet/   --batch_size=1   --save_every_iters 1000   --name mfnet3

@@ -185,7 +185,7 @@ class Inference:
         
         os.makedirs(os.path.join(self.name, 'dec_RGB'), exist_ok=True) 
         os.makedirs(os.path.join(self.name, 'dec_D'), exist_ok=True)
-        os.makedirs(os.path.join(self.name, 'dec_Sobel'), exist_ok=True)
+        os.makedirs(os.path.join(self.name, 'dec_TIR'), exist_ok=True)
         self.model.eval()
 
         model_wo_wrapper = self.model.module if self.config.distributed else self.model
@@ -212,19 +212,19 @@ class Inference:
             samples = plms_sampler.sample(S=50, shape=shape, input=input, uc=uc, guidance_scale=5)
             
             autoencoder_wo_wrapper = self.autoencoder # Note itself is without wrapper since we do not train that. 
-            dec_RGB, dec_D, dec_Sobel = autoencoder_wo_wrapper.decode(samples)
+            dec_RGB, dec_D, dec_TIR = autoencoder_wo_wrapper.decode(samples)
             dec_RGB = torch.clamp(dec_RGB, min=-1, max=1).cpu()
             dec_D = torch.clamp(dec_D, min=-1, max=1).cpu()
-            dec_Sobel = torch.clamp(dec_Sobel, min=-1, max=1).cpu()
+            dec_TIR = torch.clamp(dec_TIR, min=-1, max=1).cpu()
 
             item = batch['item'][0]
             torchvision.utils.save_image( dec_RGB, os.path.join(self.name, 'dec_RGB', f'{item}.jpg'), nrow=1, normalize=True, scale_each=True, range=(-1,1))
             torchvision.utils.save_image( dec_D, os.path.join(self.name, 'dec_D', f'{item}.jpg'), nrow=1, normalize=True, scale_each=True, range=(-1,1))
-            torchvision.utils.save_image( dec_Sobel, os.path.join(self.name, 'dec_Sobel', f'{item}.jpg'), nrow=1, normalize=True, scale_each=True, range=(-1,1))
+            torchvision.utils.save_image( dec_TIR, os.path.join(self.name, 'dec_TIR', f'{item}.jpg'), nrow=1, normalize=True, scale_each=True, range=(-1,1))
 
             if "sem" in batch:
                 os.makedirs(os.path.join(self.name, 'sem'), exist_ok=True)
-                if batch["sem"].shape[1] == 9:
+                if batch["sem"].shape[2] == 9:
                     color_map = {
                         0: [0, 0, 0],
                         1: [255, 0, 0],
@@ -318,13 +318,22 @@ if __name__ == "__main__":
         config.model.params.inpaint_mode = True
 
 
-    config.train_dataset_names.SODSobelGrounding.prob_use_caption = 1
-    config.train_dataset_names.SODSobelGrounding.random_crop = False
-    config.train_dataset_names.SODSobelGrounding.random_flip = False
+    # config.train_dataset_names.SODSobelGrounding.prob_use_caption = 1
+    # config.train_dataset_names.SODSobelGrounding.random_crop = False
+    # config.train_dataset_names.SODSobelGrounding.random_flip = False
+
+    # config.train_dataset_names.FlirGrounding.prob_use_caption = 1
+    # config.train_dataset_names.FlirGrounding.random_crop = False
+    # config.train_dataset_names.FlirGrounding.random_flip = False   
+    config.train_dataset_names.MFNetGrounding.prob_use_caption = 1
+    config.train_dataset_names.MFNetGrounding.random_crop = False
+    config.train_dataset_names.MFNetGrounding.random_flip = False 
 
     trainer = Inference(config)
     synchronize()
     trainer.start_inference()
 
     # CUDA_VISIBLE_DEVICES=0 python -m torch.distributed.launch --nproc_per_node=1 inference3.py  --yaml_file=configs/come_sobel_sod.yaml  --DATA_ROOT=./DATA/come/  --name come3
+
+    # CUDA_VISIBLE_DEVICES=0 python -m torch.distributed.launch --nproc_per_node=1 inference3.py  --yaml_file=configs/mfnet_triple.yaml  --DATA_ROOT=/data16_2/wangzeyu/dataset/mfnet/ --OUTPUT_ROOT /data16_2/wangzeyu/diffx_output/ --name mfnet3
 
