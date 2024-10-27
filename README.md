@@ -52,7 +52,7 @@ Download the checkpoint of [Long-CLIP](https://huggingface.co/BeichenZhang/LongC
 
 **4. Training:**
 
-   For the four types of ''RGB+X'' generation tasks on FLIR, MFNet, and COME15K datasets:
+   For the ''RGB+X'' generation tasks on FLIR, MFNet, and COME15K datasets:
    ```
    # Firstly, train the MP-VAE:
    CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 scripts/train_autoencoder.py  --yaml_file=configs/flir_text.yaml  --DATA_ROOT=./DATA/flir/   --batch_size=2   --save_every_iters 1000   --name flir
@@ -67,7 +67,7 @@ Download the checkpoint of [Long-CLIP](https://huggingface.co/BeichenZhang/LongC
    CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 scripts/train_diffusion.py  --yaml_file=configs/come_sobel.yaml  --DATA_ROOT=./DATA/come/   --batch_size=8   --save_every_iters 1000   --name come_sobel
    ```
 
-   For the ''RGB+T+D'' generation task on FLIR and MFNet datasets:
+   For the ''RGB+T+D'' generation tasks on FLIR and MFNet datasets:
    ```
    # Firstly, train the MP-VAE:
    CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 scripts/train_autoencoder3.py  --yaml_file=configs/flir_text_triple.yaml  --DATA_ROOT=./DATA/flir/   --batch_size=1   --save_every_iters 1000   --name flir3
@@ -87,7 +87,7 @@ Download the checkpoint of [Long-CLIP](https://huggingface.co/BeichenZhang/LongC
 
 **5. Inference:**
 
-   For the four types of ''RGB+X'' generation tasks on FLIR, MFNet, and COME15K datasets:
+   For the ''RGB+X'' generation tasks on FLIR, MFNet, and COME15K datasets:
    ```
    CUDA_VISIBLE_DEVICES=0 python -m torch.distributed.launch --nproc_per_node=1 scripts/inference.py  --yaml_file=configs/flir_text.yaml  --DATA_ROOT=./DATA/flir/  --name flir
    CUDA_VISIBLE_DEVICES=0 python -m torch.distributed.launch --nproc_per_node=1 scripts/inference.py  --yaml_file=configs/mfnet.yaml  --DATA_ROOT=./DATA/mfnet/  --name mfnet
@@ -95,7 +95,7 @@ Download the checkpoint of [Long-CLIP](https://huggingface.co/BeichenZhang/LongC
    CUDA_VISIBLE_DEVICES=0 python -m torch.distributed.launch --nproc_per_node=1 scripts/inference.py  --yaml_file=configs/come_sobel.yaml  --DATA_ROOT=./DATA/come/  --name come_sobel
    ```
 
-   For the ''RGB+T+D'' generation task on FLIR and MFNet datasets:
+   For the ''RGB+T+D'' generation tasks on FLIR and MFNet datasets:
    ```
    CUDA_VISIBLE_DEVICES=0 python -m torch.distributed.launch --nproc_per_node=1 scripts/inference3.py  --yaml_file=configs/flir_text_triple.yaml  --DATA_ROOT=./DATA/flir/  --name flir3
    CUDA_VISIBLE_DEVICES=0 python -m torch.distributed.launch --nproc_per_node=1 scripts/inference3.py  --yaml_file=configs/mfnet_triple.yaml  --DATA_ROOT=./DATA/mfnet/  --name mfnet3
