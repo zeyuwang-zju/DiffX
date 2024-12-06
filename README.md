@@ -116,10 +116,16 @@ Pre-trained models coming soon.
 ![image](https://github.com/user-attachments/assets/44588c75-0b24-4fbd-8b70-6412adb5823a)
 
 
-
 **Results2:** Qualitative results on cross-modal “RGB+X+Y” generation on FLIR, MFNet, and COME15K datasets:
 
 ![image](https://github.com/user-attachments/assets/c934757d-c78a-4e7a-a9a7-e70af46222e7)
+
+**Results3:** Qualitative results on “3DDFA → RGB+NIR+SWIR+T” task on MCXFace dataset  :
+
+![result3](https://github.com/user-attachments/assets/1c74c3f3-3c31-4a36-b81f-fc3605fc24a5)
+
+More results can be found in our paper and appendix!
+
 
 ## Acknowledgements
 This code is built on [GLIGEN (PyTorch)](https://github.com/gligen/GLIGEN) and [Long-CLIP (PyTorch)](https://github.com/beichenzbc/Long-CLIP). We thank the authors for sharing the codes.
@@ -146,9 +152,3 @@ If you make use of our work, please cite our paper:
       url={https://arxiv.org/abs/2407.15488}, 
 }
 ```
-
-**Results3:** Qualitative results on “3DDFA → RGB+NIR+SWIR+T” task on MCXFace dataset  :
-
-![result3](https://github.com/user-attachments/assets/1c74c3f3-3c31-4a36-b81f-fc3605fc24a5)
-
-More results can be found in our paper and appendix!
