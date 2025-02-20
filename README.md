@@ -138,17 +138,3 @@ This program is free software: you can redistribute it and/or modify it under th
 
 ## Contact
 If you have any questions, please contact me by email (wangzeyu2020@zju.edu.cn).
-
-## Citation
-If you make use of our work, please cite our paper:
-```
-@misc{wang2024diffxguidelayoutcrossmodal,
-      title={DiffX: Guide Your Layout to Cross-Modal Generative Modeling}, 
-      author={Zeyu Wang and Jingyu Lin and Yifei Qian and Yi Huang and Shicen Tian and Bosong Chai and Juncan Deng and Qu Yang and Lan Du and Cunjian Chen and Yufei Guo and Kejie Huang},
-      year={2024},
-      eprint={2407.15488},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2407.15488}, 
-}
-```
